@@ -47,6 +47,7 @@ namespace Helpers.DAL
         }
         public static bool CheckifAliasExist(string alias)
         {
+
             return GetAll().Exists(a => a.Name == alias);
         }
     }
