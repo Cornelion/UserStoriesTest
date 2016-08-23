@@ -1,0 +1,5 @@
+﻿1;Post-it-note;2.25
+2;Pencil;1.21
+3;Notebook;2.00
+4;Computer mouse;13.639
+5;Keyboard;23.54

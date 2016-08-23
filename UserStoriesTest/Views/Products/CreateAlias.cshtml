@@ -1,0 +1,19 @@
+﻿@model Models.OrderVM
+
+@{
+    ViewBag.Title = "CreateAlias";
+}
+
+<h2>CreateAlias</h2>
+
+<p>Would you like to create an alias?</p>
+@using (Html.BeginForm("Createalias", "Products"))
+{<div class="form-horizontal">
+        <input type="checkbox" name="createalias" value="Yes,please" />
+        @*@Html.Label(Model.User.Alias)*@
+        <input type="text" name="aliasvalue" id="aliasvalue" />
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Next" class="btn btn-default" />
+        </div>
+    </div>
+}

@@ -1,0 +1,10 @@
+﻿@model Models.Order
+@using System.Globalization
+
+<div>
+    <p>MyCart::Items: @Model.Products.Count() Total: @String.Format(new CultureInfo("fr-BE"), "{0:C}", @Model.Total)</p>@Html.ActionLink("CHECKOUT", "PrepareCheckOut", "Products",null, htmlAttributes: new { id = "checkoutbutton" })
+    @if (Model.Products.Count() > 0)
+    {@*<div id="checkoutbutton">CHECKOUT</div>*@ 
+        <script>$("#checkoutbutton").animate({'opacity' : 1},300) </script>
+    }
+</div>

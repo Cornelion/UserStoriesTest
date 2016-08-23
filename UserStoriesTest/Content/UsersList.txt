@@ -1,0 +1,4 @@
+DummyUser;Polka;
+admin;admin;aliasadmin
+Noalias;noalias;
+Webonly;webonly;

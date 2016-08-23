@@ -1,0 +1,108 @@
+﻿@model Models.PaymentVM
+@using System.Globalization
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CustomCheckOut</title>
+</head>
+<body>
+    <h1>This is your order:</h1>
+
+    <table class="table">
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>Total</th>
+        </tr>
+        @foreach (var item in Model.order.Products)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @String.Format(new CultureInfo("fr-BE"), "{0:C}", @item.Total)
+                </td>
+            </tr>
+        }
+        <tr>
+            <td></td>
+            <td></td>
+            <td>@String.Format(new CultureInfo("fr-BE"), "{0:C}", @Model.order.Total)</td>
+        </tr>
+    </table>
+    <form method="post" action="DirectRequest" id="form1" name="form1">
+        @foreach (string s in Model.Param.Keys)
+        {
+            <input type="hidden" name=@s value=@Model.Param[s]>
+        }
+        @{bool b = String.IsNullOrEmpty(Model.SelectedAlias.CardNo); }
+        <table>
+@if (String.IsNullOrEmpty(Model.SelectedAlias.CardNo))
+{
+            <tr>
+                <td>
+                    @Html.Label("Card Type")
+                </td>
+                <td>
+                    <p>@Html.RadioButton("BRAND", "Visa")Visa @Html.RadioButton("BRAND", "MasterCard")MasterCard
+                    </p>
+                    
+</td>
+            </tr>
+}
+            <tr>
+                <td>
+                    @Html.Label("Card Holder Name")
+                </td>
+                <td>
+                    @*<input type="text" name="CN" id="CN" />*@
+                    @*@Html.TextBoxFor(Model => Model.User.UserName, new { @name = "CN", @id = "CN", @placeholder = @Model.User.UserName ?? "" })*@
+                    <input id="CN" name="CN" type="text" value=@(Model.SelectedAlias.Cn ?? String.Empty)>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.Label("Card Number")
+                </td>
+                <td>
+                    @*<input type="text" name="CARDNO" id="CARDNO" />*@
+                    @*  @Html.TextBoxFor(Model => Model.SelectedAlias.Cn, new { name="CARDNO", id="CARDNO",@placeholder = @Model.SelectedAlias.Cn ?? "" })*@
+                    <input id="CARDNO" name="CARDNO" type="text" value=@(Model.SelectedAlias.CardNo ?? String.Empty) >
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.Label("Expiry Date")
+                </td>
+                <td>
+                    @*<input type="text" name="ED" id="ED" />*@
+                    @*@Html.TextBoxFor(Model => Model.SelectedAlias.Ed, new { name = "ED", id = "ED", @placeholder = @Model.SelectedAlias.Ed ?? "" })*@
+                    <input id="ED" name="ED" type="text" value=@(Model.SelectedAlias.Ed ?? String.Empty) >
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.Label("CVC")
+                </td>
+                <td>
+                    <input type="text" name="CVC" id="CVC" />
+                </td>
+            </tr>
+        </table>
+        <input type="submit" value="CheckOut">
+        </form>
+</body>
+</html>

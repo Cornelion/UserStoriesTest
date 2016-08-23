@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Models.Product>
+@using System.Globalization
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>View</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@if (Request.IsAuthenticated)
+{<div id="checkout">
+     
+        Your cart is empty. Please, buy something from us!
+    </div>
+            }
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th></th>
+    </tr>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+           @* @Html.DisplayFor(modelItem => item.Price)*@
+           @String.Format(new CultureInfo("fr-BE"), "{0:C}", @item.Price)
+        </td>
+        <td>
+            @if (Request.IsAuthenticated)
+            {
+                <div id="actions">
+                    <p onclick="addToCart(@item.Ref)">+</p>
+                    <p onclick="removeFromCart(@item.Ref)">-</p>
+                </div>
+                @*@Html.ActionLink("+", "AddToCart", new {  id=item.Id  })
+                @Html.ActionLink("-", "RemoveFromCart", new { id = item.Id })*@
+            }
+           
+        </td>
+    </tr>
+}
+
+</table>

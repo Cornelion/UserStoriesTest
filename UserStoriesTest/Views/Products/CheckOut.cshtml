@@ -1,0 +1,70 @@
+﻿@model Models.PaymentVM
+@using System.Globalization
+
+@{
+    ViewBag.Title = "View";
+}
+<h1>This is your order:</h1>
+
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+           Quantity
+        </th>
+        <th>Total</th>
+    </tr>
+    @foreach (var item in Model.order.Products)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+               @String.Format(new CultureInfo("fr-BE"), "{0:C}", @item.Total)
+            </td>
+        </tr>
+    }
+    <tr>
+        <td></td>
+        <td></td>
+        <td>@String.Format(new CultureInfo("fr-BE"), "{0:C}", @Model.order.Total)</td>
+    </tr>
+</table>
+
+
+
+@*action="https://webdev.oglan.local/ncol/test/orderstandard.asp"*@
+@*action="DirectRequest"*@
+
+<form method="post" action="https://webdev.oglan.local/ncol/test/orderstandard.asp" id="form1" name="form1">
+    <!-- general parameters: see Form parameters -->
+  
+    @foreach (string s in Model.Param.Keys)
+    {
+        <input type="hidden" name=@s value=@Model.Param[s]>
+    }
+@*@if (Model.SelectedAlias!=null && !String.IsNullOrEmpty(Model.SelectedAlias.Name))
+{  
+    <input type="hidden" name="ALIAS" value=@Model.Parameters["ALIAS"]>
+    <input type="hidden" name="ALIASUSAGE" value=@Model.Parameters["ALIASUSAGE"]>
+    }
+    <input type="hidden" name="AMOUNT" value=@Model.Parameters["AMOUNT"]>
+    <input type="hidden" name="CURRENCY" value=@Model.Parameters["CURRENCY"]>
+    <input type="hidden" name="OPERATION" value=@Model.Parameters["OPERATION"]>
+    <input type="hidden" name="ORDERID" value=@Model.Parameters["ORDERID"]>
+    <input type="hidden" name="PSPID" value=@Model.Parameters["PSPID"]>
+    <input type="hidden" name="PSWD" value=@Model.Parameters["PSWD"]>
+  
+    <input type="hidden" name="USERID" value=@Model.Parameters["USERID"]>*@
+
+  
+
+
+    <input type="submit" value="CheckOut" >
+</form>

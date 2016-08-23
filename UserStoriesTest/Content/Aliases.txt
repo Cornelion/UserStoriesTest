@@ -1,0 +1,4 @@
+﻿;;;
+premier;Noalias;0117;XXXXXXXXXXXX1111
+deuxieme;Noalias;0220;XXXXXXXXXXXX9999
+Troisieme;Noalias;0219;670300-XXXXXXXX-03

@@ -1,0 +1,24 @@
+﻿@model Models.OrderVM
+
+@{
+    ViewBag.Title = "AliasPage";
+}
+
+<h2>AliasPage</h2>
+
+<p>We have this Alias associated with your account. Would you like to use it?</p>
+@using (Html.BeginForm("UseAlias","Products"))
+{<div class="form-horizontal">
+        <input type="checkbox" name="usealias"/>
+       @Html.DropDownList("alias")
+     <div class="col-md-offset-2 col-md-10">
+         <input type="submit" value="Next" class="btn btn-default" />
+     </div>
+    </div>
+        
+}
+
+   
+    
+   
+
