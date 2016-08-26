@@ -37,6 +37,10 @@ namespace Helpers.DAL
         {
             return GetAllPayments().Where(p => p.PayId == reference.ToString()).FirstOrDefault();
         }
+        public static Payment FindPaymentByPayid(string reference)
+        {
+            return GetAllPayments().Where(p => p.PayId == reference).FirstOrDefault();
+        }
         public static List<Payment> GetAllPayments()
         {
             string[] users = System.IO.File.ReadAllLines(System.Web.HttpContext.Current.Server.MapPath("~/Content/PaymentsList.txt"));

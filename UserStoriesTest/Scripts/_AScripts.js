@@ -58,8 +58,38 @@ function removeFromCart(idsent) {
 }
 
 function paymentcapture(payid) {
+    
     $.ajax({
         data: { reference: payid },
         url: 'PostSale/DirectCapture'
     })
 }
+function directquery(payid) {
+    console.log('on y va...');
+    $.ajax({
+        data: { payid: payid },
+        url: 'PostSale/DirectQuery'
+    })
+}
+function generateBatch() {
+    //console.log('tralala');
+    var references = new Array();
+    $('#paymentstable input[type = checkbox]').each(function () {
+        if (this.checked) {
+            var value = (this.value);
+            //console.log(value);
+            references.push(value);
+        }
+    })
+    console.log(references);
+    $.ajax({
+        traditional: true,
+        //dataType: "json",
+        data: { references: references },
+        url: 'PostSale/GenerateBatch'
+    }).done(function (partialviewresult) {
+        console.log('oui');
+        //console.log(partialviewresult)
+        $("#batchform").html(partialviewresult);
+    });
+};

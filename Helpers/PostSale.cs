@@ -77,6 +77,48 @@ namespace Helpers
                 payment.Status ;
             File.WriteAllLines(path, arrLine);
         }
-
+        //param.Add("AMOUNT", (Convert.ToDecimal(payment.Amount) * 100).ToString("0.##"));
+        public List<string> GenerateBatch(List<Payment> payments)
+        {
+            string numberofpayments = payments.Count().ToString();
+            string path = System.Web.HttpContext.Current.Server.MapPath("~/Content/BatchFile.txt");
+            List<string> order = new List<string>();
+            ASCIIEncoding asciiEncoding = new ASCIIEncoding();
+            string ohlheader = "OHL;EPhilippeTest;N4t&1ytqE#;;user-API;";
+            order.Add(EncodeLine(ohlheader));
+            string header = "OHF;File;MTR;SAS;" + numberofpayments + ";";
+            order.Add(EncodeLine(header));
+            foreach (Payment payment in payments)
+            {
+                string line =
+                    ((Convert.ToDecimal(payment.Amount) * 100).ToString("0.##")) + ";" +
+                    payment.Currency + ";" +
+                    ";" +
+                    ";" +
+                    ";" +
+                    payment.Orderid + ";" +
+                    ";" +
+                    ";" +
+                    payment.PayId + ";" +
+                    "SAS;";
+               
+                
+                order.Add(EncodeLine(line));
+            }
+            order.Add(EncodeLine("OTF;"));
+            return order;
+           //File.Create(path).Close();
+           //File.AppendAllText(path, order.ToString());
+            
+            
+        }
+        public string EncodeLine(string source)
+        {
+            ASCIIEncoding asciiEncoding = new ASCIIEncoding();
+            List<byte> bytes = asciiEncoding.GetBytes(source).ToList();
+            bytes.Add(0xd);
+            bytes.Add(0xA);
+            return asciiEncoding.GetString(bytes.ToArray());
+        }
     }
 }

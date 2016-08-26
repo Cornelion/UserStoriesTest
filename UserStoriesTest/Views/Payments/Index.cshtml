@@ -9,7 +9,7 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table id="paymentstable" class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.PayId)
@@ -56,19 +56,42 @@
             @Html.DisplayFor(modelItem => item.DecodedStatus)
         </td>
         <td>
-            <div onclick="paymentcapture(@item.PayId)">Capture</div>
+            <input type="checkbox" value=@item.PayId />
+        </td>
+        <td>
+            <button class="btn btn-primary" onclick="paymentcapture(@item.PayId)">Capture</button>
+        </td>
+        <td>
+            <button class="btn btn-warning" onclick="directquery(@item.PayId)">Query</button>
         </td>
     </tr>
 }
-    @*<tr>
+    <tr>
         <td></td>
         <td></td>
         <td></td>
         <td></td>
         <td></td>
         <td></td>
-        <td><div onclick="directCapture()">Capture Selected</div></td>
-       
+        <td><button onclick="generateBatch()">Generate Batch</button></td>
+        <td></td>
+        <td></td>
 
-    </tr>*@
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+            <div id="batchform">
+
+            </div>
+        </td>
+        <td></td>
+        <td></td>
+    </tr>
 </table>
+

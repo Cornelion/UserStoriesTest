@@ -322,6 +322,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Content Include="Views\Products\CustomCheckOut.cshtml" />
+    <Content Include="Views\PostSale\BatchFile.cshtml" />
+    <Content Include="Views\Shared\_BatchFile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

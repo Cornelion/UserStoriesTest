@@ -13,7 +13,7 @@ namespace UserStoriesTest.Controllers
         // GET: Alias
         public ActionResult Index()
         {
-            List<Alias> aliases = (List<Alias>)TempData["aliases"];
+            List<Alias> aliases = (List<Alias>)TempData["aliases"] ?? new List<Alias>();
             if (aliases.Count > 0)
             {
                 List<SelectListItem> items = new List<SelectListItem>();
@@ -57,7 +57,7 @@ namespace UserStoriesTest.Controllers
             if (!String.IsNullOrEmpty(Request.Form["createalias"]))
                 alias = new Alias { Name = Request.Form["aliasvalue"] , isnew=true};
             else
-                alias = null;
+                alias = new Alias() { isnew = true };
             TempData["selectedalias"] = alias;
             return RedirectToAction("CheckOut","Products");
         }

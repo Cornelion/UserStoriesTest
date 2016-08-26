@@ -77,7 +77,7 @@ namespace UserStoriesTest.Controllers
         }
         public ActionResult CheckOut()
         {   //?? new Alias()
-            Alias alias = (Alias)TempData["selectedalias"]  ;
+            Alias alias = (Alias)TempData["selectedalias"] ?? new Alias();
          
             PaymentVM payment = new PaymentVM() {
                 order = Check.GenerateOrderVM(Order),

@@ -1,0 +1,34 @@
+﻿@model IEnumerable<string>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>BatchFile</title>
+</head>
+<body>
+    <div> 
+        <form action="https://webdev.oglan.local/ncol/test/AFU_agree.asp" method="POST">
+            <textarea name="FILE">
+                @foreach (string payment in Model)
+                {@payment}
+            </textarea>
+           @* <input type="hidden" name="FILE_REFERENCE" value="BatchFile" />*@
+            @*<input type="hidden" name="PSPID" value="EPhilippeTest" />
+            <input type="hidden" name="USERID" value="user-API" />
+            <input type="hidden" name="PSWD" value="N4t&1ytqE#" />
+            <input type="hidden" name="TRANSACTION_CODE" value="MTR" />*@
+           @* <input type="hidden" name="OPERATION" value="SAS" />*@
+            @*<input type="hidden" name="NB_PAYMENT" value=@Model.Count().ToString() />*@
+            <input type="hidden" name="REPLY_TYPE" value="XML" />
+            <input type="hidden" name="MODE" value="ASYNC" />
+            <input type="hidden" name="PROCESS_MODE" value="CHECKANDPROCESS" />
+            <input type="submit" value="Send to Ogone" />
+        </form>
+    </div>
+</body>
+</html>
